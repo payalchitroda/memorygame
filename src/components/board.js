@@ -3,44 +3,92 @@ import Card from './Card/card';
 class Board extends React.Component {
     constructor(props) {
         super(props)
-        this.change = this.change.bind(this);
         this.state = {
-            store: [],
-            flipped: [],
+            cardList: [],
+            cardFlipped: [],
+            count: 0,
+            card1Id: "",
+            card2Id: "",
         };
 
     }
-    change(i) {
-        console.log("parent   "+i)
-        const newflipped = this.state.flipped.slice();
-        if (newflipped[i] == false) {
-            newflipped[i] = !newflipped[i];
-            this.setState({ 
-              flipped: newflipped,
-            });
+
+
+    change = (id) => {
+
+        let cardList = [...this.state.cardList];
+        var k;
+        for (var j = 0; j < cardList.length; j++) {
+            if (cardList[j].id == id) {
+                k = j;
+                break;
+            }
         }
-        
-        console.log(this.state.flipped)
+        let card = { ...cardList[k] };
+        this.setState({ card1Id: this.state.card2Id, card2Id: k });
+
+        var count = this.state.count;
+        if (this.state.count == 2) {
+            let card1 = { ...cardList[this.state.card1Id] };
+            let card2 = { ...cardList[this.state.card2Id] };
+            if (card1.value == card2.value) {
+                console.log("matched");
+            }
+            else {
+                card1.flip = false
+                cardList[this.state.card1Id] = card1;
+                card2.flip = false
+                cardList[this.state.card2Id] = card2;
+            }
+            console.log("ccccount" + this.state.count)
+            this.setState({ cardList: cardList, count: 0 });
+            return
+
+        }
+
+        console.log("count" + this.state.count)
+        if (card.flip == false) {
+            card.flip = !card.flip;
+            cardList[k] = card;
+            count++
+            this.setState({ cardList: cardList });
+            console.log(card.id);
+
+        }
+        else {
+            card.flip = !card.flip;
+            cardList[k] = card;
+            count--
+            this.setState({ cardList: cardList });
+        }
+        this.setState({ count: count });
 
     }
-    start(size) {
+    start = (size) => {
         var k = 0;
-        var store = [];
-        var flipped= Array(size*size).fill(false);
-
-        
-        //store information of card in store
+        var cardList = [];
         for (var i = 0; i < size; i++) {
             for (var j = 0; j < size; j++) {
                 var value = k % (size * (size / 2));
-                // store.push(<Card id={k} value={value} change={this.change} />)
-                store.push({ id: k, value: value })
+                cardList.push({ id: k, value: value, flip: false })
                 k++;
             }
 
         }
-        store.sort(() => Math.random() - 0.5)
-        this.setState({ store: store,flipped:flipped });
+        cardList.sort(() => Math.random() - 0.5)
+        this.setState({ cardList: cardList });
+
+
+    }
+    restart = (size) => {
+        this.setState({
+            cardList: [],
+            cardFlipped: [],
+            count: 0,
+            card1Id: "",
+            card2Id: "",
+        });
+        this.start(size)
 
 
     }
@@ -52,16 +100,16 @@ class Board extends React.Component {
         return (
             <div>
                 <button onClick={() => this.start(this.props.size)}>start</button>
-                {this.state.cardIndex}
+                <button onClick={() => this.restart(this.props.size)}>Restart</button>
+
                 <br />
-                {/* {this.state.store}    create instance of card with the help of store, pass flip prop to card*/}
-                {this.state.store.map(store => (
+                {this.state.cardList.map(cardList => (
                     <Card
-                        id={store.id}
-                        value={store.value}
-                        flip={this.state.flipped[store.id]}
+                        id={cardList.id}
+                        value={cardList.value}
+                        flip={cardList.flip}
                         change={this.change}
-                        
+
                     />
                 ))}
             </div >
