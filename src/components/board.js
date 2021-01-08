@@ -5,7 +5,6 @@ class Board extends React.Component {
         super(props)
         this.state = {
             cardList: [],
-            cardFlipped: [],
             count: 0,
             card1Id: "",
             card2Id: "",
@@ -16,7 +15,7 @@ class Board extends React.Component {
 
     change = (id) => {
 
-        let cardList = [...this.state.cardList];
+        let cardList = this.state.cardList;
         var k;
         for (var j = 0; j < cardList.length; j++) {
             if (cardList[j].id == id) {
@@ -24,13 +23,13 @@ class Board extends React.Component {
                 break;
             }
         }
-        let card = { ...cardList[k] };
+        let card =cardList[k];
         this.setState({ card1Id: this.state.card2Id, card2Id: k });
 
         var count = this.state.count;
         if (this.state.count == 2) {
-            let card1 = { ...cardList[this.state.card1Id] };
-            let card2 = { ...cardList[this.state.card2Id] };
+            let card1 = cardList[this.state.card1Id] ;
+            let card2 = cardList[this.state.card2Id] ;
             if (card1.value == card2.value) {
                 console.log("matched");
             }
