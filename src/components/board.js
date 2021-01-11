@@ -28,19 +28,19 @@ class Board extends React.Component {
             }
         }
         let card = cardList[cardIndex];
-        if(this.state.count!=2)
-        this.setState({ card1Id: this.state.card2Id, card2Id: cardIndex });
-       // console.log(this.state.card1Id + "   ======" + this.state.card2Id)
+        if (this.state.count != 2)
+            this.setState({ card1Id: this.state.card2Id, card2Id: cardIndex });
+        // console.log(this.state.card1Id + "   ======" + this.state.card2Id)
         var count = this.state.count;
         if (this.state.count == 2) {
 
             let card1 = cardList[this.state.card1Id];
             let card2 = cardList[this.state.card2Id];
-          //  console.log(card1.value+"------  "+card2.value)
+            //  console.log(card1.value+"------  "+card2.value)
 
 
             if (card1.value == card2.value) {
-               // console.log("matched");
+                // console.log("matched");
                 this.state.player ? this.setState({ player1score: this.state.player1score + 1 }) : this.setState({ player2score: this.state.player2score + 1 })
                 card1.flip = 2
                 cardList[this.state.card1Id] = card1;
@@ -53,9 +53,20 @@ class Board extends React.Component {
                 card2.flip = (card2.flip == 1) ? 0 : card2.flip
                 cardList[this.state.card2Id] = card2;
                 this.setState({ player: !this.state.player });
-               // console.log(this.state.player)
+                // console.log(this.state.player)
             }
             this.setState({ cardList: cardList, count: 0 });
+
+            var cardflippedcount = 0;
+            for (var j = 0; j < cardList.length; j++) {
+                if (cardList[j].flip == 2) {
+                    cardflippedcount++;
+                }
+            }
+            if (cardflippedcount == (this.props.size * this.props.size)) {
+                console.log(cardflippedcount)
+                this.setState({ win: true });
+            }
             return
 
         }
@@ -75,21 +86,15 @@ class Board extends React.Component {
             this.setState({ cardList: cardList });
         }
         this.setState({ count: count });
+
+
+
         if (count == 2) {
 
             setTimeout(() => {
                 this.change(id)
             }, 300);
         }
-
-        var cardflippedcount = 0;
-        for (var j = 0; j < cardList.length; j++) {
-            if (cardList[j].flip == 1) {
-                cardflippedcount++;
-            }
-        }
-        if (cardflippedcount == this.props.size * this.props.size) this.setState({ win: true });
-
     }
 
 
