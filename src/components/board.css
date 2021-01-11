@@ -2,18 +2,24 @@
     display: grid;
     grid-template-columns: repeat(4, 110px);
     gap: 5px;
-    margin-left:500px;
+    justify-content: center;
     
   }
   .grid2 {
     display: grid;
     grid-template-columns: repeat(6, 110px);
-    gap: 5px;
+    gap: 10px;
+    justify-content: center;
+    
   }
   .grid3 {
     display: grid;
     grid-template-columns: repeat(10, 110px);
     gap: 5px;
+    justify-content: center;
     
+
     
   }
+
+  

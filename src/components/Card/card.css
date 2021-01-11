@@ -12,3 +12,10 @@
     background-color: rgb(211, 154, 49);
    
 }
+.flippedcard{
+    width: 100px;
+    height:100px;     
+    border-Style: solid;
+    background-color: rgb(125, 128, 150);
+   
+}

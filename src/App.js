@@ -6,10 +6,10 @@ function App() {
     <div className="App">
       <div className="header"><h2>Memory Game</h2></div>
       <Router>
-               
-                <Route path="/" component={Home}/>
-                </Router>
-      </div>
+
+        <Route path="/" component={Home} />
+      </Router>
+    </div>
   );
 }
 

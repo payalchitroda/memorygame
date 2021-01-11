@@ -11,7 +11,7 @@ class Card extends React.Component {
         const {id, flip, value} = this.props
         return (
 
-            <div className={flip?'backcard':'frontcard'}  onClick={() =>  this.props.change(id)}>
+            <div className={flip==0?'frontcard':(flip==1?'backcard':'flippedcard')}  onClick={() =>  this.props.change(id)}>
             {flip?value:'!'}
          </div >
         );
