@@ -1,5 +1,7 @@
 import React from 'react';
 import Board from './board';
+import './home.css';
+
 class Home extends React.Component {
 
     constructor(props) {
@@ -17,11 +19,13 @@ class Home extends React.Component {
 
         return (
             <div>
-                <h2>Select level</h2>
-                <br />
-                <button onClick={() => this.print(4)} >Beginner</button>
-                <button onClick={() => this.print(6)}>Intermediate</button>
+                <h3>Select level</h3>
+                <div>
+                <button onClick={() => this.print(4)} >Beginner</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                <button onClick={() => this.print(6)}>Intermediate</button>&nbsp;&nbsp;&nbsp;&nbsp;
                 <button onClick={() => this.print(10)}>Advanced</button>
+                </div>
+                <br/>
                 <Board size={this.state.size} />
             </div >
         );

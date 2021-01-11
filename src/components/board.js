@@ -98,8 +98,6 @@ class Board extends React.Component {
     }
 
 
-
-
     start = (size) => {
         var k = 0;
         var cardList = [];
@@ -135,15 +133,15 @@ class Board extends React.Component {
         const { size } = this.props
         return (
             <div>
-                <button onClick={() => this.start(size)}>start</button>
+                <button onClick={() => this.start(size)}>Start</button>&nbsp;&nbsp;
                 <button onClick={() => this.restart(size)}>Restart</button>
 
                 <br />
-                {this.state.player ? 'player1' : 'player2'}
+                <div className='player'>{this.state.player ? 'Player1' : 'Player2'}</div>
+                <div className='player1score'>Player1 score: {this.state.player1score}</div>
+                <div className='winner'> {this.state.win ? ((this.state.player1score > this.state.player2score) ? "🥳Player1 wins🥳" : "🥳Player2 wins🥳") : ""}</div>
+                <div className='player2score'>Player2 score: {this.state.player2score}</div>
                 <br />
-                player1score{this.state.player1score}
-                <br />
-                player2score{this.state.player2score}
                 <br />
                 <div class={size == 4 ? 'grid1' : (size == 6 ? 'grid2' : 'grid3')}>
                     {this.state.cardList.map(cardList => (
@@ -156,8 +154,7 @@ class Board extends React.Component {
                         />
                     ))}
                 </div>
-                <br />
-                {this.state.win ? ((this.state.player1score > this.state.player2score) ? "player1 wins" : "player2 wins") : ""}
+
             </div >
         );
     }

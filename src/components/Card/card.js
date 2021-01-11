@@ -8,12 +8,12 @@ class Card extends React.Component {
     }
 
     render() {
-        const {id, flip, value} = this.props
+        const { id, flip, value } = this.props
         return (
 
-            <div className={flip==0?'frontcard':(flip==1?'backcard':'flippedcard')}  onClick={() =>  this.props.change(id)}>
-            {flip?value:'!'}
-         </div >
+            <div className={flip == 0 ? 'frontcard' : (flip == 1 ? 'backcard' : 'flippedcard')} onClick={() => this.props.change(id)}>
+                {flip ? value : '!'}
+            </div >
         );
     }
 }
