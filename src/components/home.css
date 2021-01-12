@@ -1,0 +1,13 @@
+button:focus{
+    background:rgba(250, 150, 56, 0.952);
+    
+}
+button:active{
+    background:rgba(250, 150, 56, 0.952);
+    
+}
+button{
+  width: 200px;
+    font-size: 15px;
+    padding: 10px 24px;
+}
